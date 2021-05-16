@@ -18,7 +18,7 @@
       </a>
     </div>
     <div class="bp-col">
-      <a href="setting.html">
+      <a href="setting">
         <div class="bp-icon"><img src="images/ipaccount.png" alt="icon"></div>
         <div class="bp-text">Account</div>
       </a>

@@ -78,7 +78,7 @@
           <div class="row field-row have-a-account">
             <div class="col">
               <div class="field-group">
-                Already have a account? <a href="login.html"> Login </a>
+                Already have a account? <a href="login"> Login </a>
               </div>
             </div>
           </div>

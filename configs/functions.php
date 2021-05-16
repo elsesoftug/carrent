@@ -28,6 +28,7 @@ function Register(){
 		$_SESSION['fname'] = $input[0];
 		$_SESSION['lname'] = $input[1];
 		$_SESSION['telphone'] = $input[5];
+		$_SESSION['msg']="";
 		
 		header("Location: http://127.0.0.1/home/index");
 		   

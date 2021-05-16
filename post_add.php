@@ -1,6 +1,8 @@
 <?php include('configs/functions.php');?>
 <?php include('includes/header.php');?>
-<?php include('includes/navbar.php');?>
+<?php include('includes/navbar.php');
+$_SESSION['msg']="";
+?>
   <!-- Content  -->
   <?php if(isset($_POST['post_add'])){
         Post_add();        
