@@ -4,33 +4,35 @@ session_start();
 //adding next of kin
 function Register(){
     require "database.php";
-     //Get Post variables and placing them in an array
-	 $input = array();
-	 $input[0] = $mysqli->escape_string($_POST['first_name']);
-	 $input[1] = $mysqli->escape_string($_POST['last_name']);
-	 $input[2] = $mysqli->escape_string($_POST['email']);
-	 $input[3] = $mysqli->escape_string($_POST['password']);
-	 $input[4] = $mysqli->escape_string("");
-	 $input[5] = $mysqli->escape_string($_POST['phone']);
+      //Get Post variables and placing them in an array
+	  $first_name = $mysqli->escape_string($_POST['first_name']);
+	  $last_name = $mysqli->escape_string($_POST['last_name']);
+      $phone = $mysqli->escape_string($_POST['phone']);
+	  $password = $mysqli->escape_string($_POST['password']);
+	  $email = $mysqli->escape_string($_POST['email']);
+	  $status = $mysqli->escape_string("");
+	  $has = $mysqli->escape_string("");
+ // prepare and bind
+	  $stmt = $mysqli->prepare("INSERT INTO accounts (firstname,lastname,telphone,password,email,status,hash)
+		values(?,?,?,?,?,?,?)");
+	  $stmt->bind_param("ssissss", $first_name,$last_name,$phone,$password,$email,$status,$has );
+	$stmt->execute();
+	$stmt->close();
+	$mysqli->close();
+		   $_SESSION['msg'];
+		if($stmt){
+		 //$_SESSION['msg'] = "  <div class=\"btn btn-success pull-center m-l-20 hidden-xs hidden-sm waves-effect waves-light\" style = \"width:50%;\" id = \"msg\">
+		 //<p>New user  has been added. Please share the password with the user</p>
+		 //</div>";
 
-	 $query ="INSERT INTO accounts (firstname,lastname,telphone,password,email,status,hash) 
-	   values('$input[0]','$input[1]','$input[5]','$input[3]','$input[2]','$input[4]','')";
-	  $insert_row = $mysqli->query($query) or die ($mysqli->error.__LINE__);
-	 
- 		 $_SESSION['msg'];
-	   if(($insert_row)){
-		//$_SESSION['msg'] = "  <div class=\"btn btn-success pull-center m-l-20 hidden-xs hidden-sm waves-effect waves-light\" style = \"width:50%;\" id = \"msg\">
-		//<p>New user  has been added. Please share the password with the user</p>
-		//</div>";
+		 $_SESSION['login'] =  $email;
+		 $_SESSION['accounttype'] =  $status;
+		 $_SESSION['fname'] = $first_name;
+		 $_SESSION['lname'] = $last_name;
+		 $_SESSION['telphone'] = $phone;
+		 $_SESSION['msg']="";
 
-		$_SESSION['login'] =  $input[2];
-		$_SESSION['accounttype'] = $input[4];
-		$_SESSION['fname'] = $input[0];
-		$_SESSION['lname'] = $input[1];
-		$_SESSION['telphone'] = $input[5];
-		$_SESSION['msg']="";
-		
-		header("Location: http://127.0.0.1/home/index");
+	  header("Location: index.php");
 		   
 	   }else{
 		$_SESSION['msg'] = "  <div class=\"btn btn-success pull-center m-l-20 hidden-xs hidden-sm waves-effect waves-light\" style = \"width:50%;\" id = \"msg\">
